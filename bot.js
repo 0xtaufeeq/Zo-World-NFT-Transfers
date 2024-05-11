@@ -30,17 +30,17 @@ bot.onText(/\/txn/, async (msg) => {
 
 function formatEvent(eventNumber, event) {
     let formattedEvent = `*Event ${eventNumber}*\n`;
-    formattedEvent += `- Address: ${event.address}\n`;
+    formattedEvent += `- Address: ${hexToDecimal(event.address)}\n`;
     formattedEvent += `- Topics: ${event.topics.join(', ')}\n`;
-    formattedEvent += `- Data: ${event.data}\n`;
-    formattedEvent += `- Block Number: ${event.blockNumber}\n`;
-    formattedEvent += `- Block Hash: ${event.blockHash}\n`;
-    formattedEvent += `- Timestamp: ${event.timeStamp}\n`;
-    formattedEvent += `- Gas Price: ${event.gasPrice}\n`;
-    formattedEvent += `- Gas Used: ${event.gasUsed}\n`;
-    formattedEvent += `- Log Index: ${event.logIndex}\n`;
-    formattedEvent += `- Transaction Hash: ${event.transactionHash}\n`;
-    formattedEvent += `- Transaction Index: ${event.transactionIndex}\n\n`;
+    formattedEvent += `- Data: ${hexToDecimal(event.data)}\n`;
+    formattedEvent += `- Block Number: ${hexToDecimal(event.blockNumber)}\n`;
+    formattedEvent += `- Block Hash: ${hexToDecimal(event.blockHash)}\n`;
+    formattedEvent += `- Timestamp: ${hexToDecimal(event.timeStamp)}\n`;
+    formattedEvent += `- Gas Price: ${hexToDecimal(event.gasPrice)}\n`;
+    formattedEvent += `- Gas Used: ${hexToDecimal(event.gasUsed)}\n`;
+    formattedEvent += `- Log Index: ${hexToDecimal(event.logIndex)}\n`;
+    formattedEvent += `- Transaction Hash: ${hexToDecimal(event.transactionHash)}\n`;
+    formattedEvent += `- Transaction Index: ${hexToDecimal(event.transactionIndex)}\n\n`;
     return formattedEvent;
 }
 
@@ -54,4 +54,8 @@ async function getContractEvents() {
         console.error('Error fetching contract events:', error);
         throw error;
     }
+}
+
+function hexToDecimal(hex) {
+    return parseInt(hex, 16);
 }
